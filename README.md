@@ -9,4 +9,5 @@ The database consists of two tables:
 
 Application Instrictions
 1. To build the application, run the (docker-compose build) command in the working directory.
-2. To spin up the solution, run the (docker-compose up) command. Wait for a few seconds, you should now be able to open up your browser and head to http://localhost:8080/swagger and see your API running smoothly.
+2. To spin up the solution, run the (docker-compose up) command. Wait for a few seconds, you should now be able to open up your browser and head to http://localhost:8080/swagger and see your API running smoothly. For basic health checks, you can use the following api http://localhost:8080/api/health
+
