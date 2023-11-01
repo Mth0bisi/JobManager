@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  sql:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sql_server2022
+    ports: 
+      - "1433:1433" 
+  webapi:
+    image: j${DOCKER_REGISTRY-}job-manager-api
+    build: 
+      context: .
+      dockerfile: JobManager/Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - sql
