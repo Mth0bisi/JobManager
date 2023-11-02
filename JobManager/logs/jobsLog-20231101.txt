@@ -1,0 +1,55 @@
+2023-11-01 14:03:40.253 +02:00 [INF] Initiating background job task...
+2023-11-01 14:03:41.308 +02:00 [INF] Entity Framework Core 6.0.24 initialized 'JobManagerDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-01 14:03:42.472 +02:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [j].[Id], [j].[Description], [j].[Interval], [j].[LastRunTime], [j].[Name]
+FROM [Jobs] AS [j]
+2023-11-01 14:03:42.570 +02:00 [INF] Task will run 1 jobs.
+2023-11-01 14:03:42.571 +02:00 [INF] Job https://localhost:44381/WeatherForecast executing...
+2023-11-01 14:03:42.706 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-01 14:03:42.707 +02:00 [INF] Hosting environment: Development
+2023-11-01 14:03:42.707 +02:00 [INF] Content root path: C:\Code\Github\JobManager\JobManager\
+2023-11-01 14:03:42.763 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44381/swagger/index.html - -
+2023-11-01 14:03:43.000 +02:00 [INF] Request starting HTTP/1.1 GET https://localhost:44381/WeatherForecast - -
+2023-11-01 14:03:43.019 +02:00 [INF] Executing endpoint 'JobManager.Controllers.WeatherForecastController.Get (JobManager)'
+2023-11-01 14:03:43.039 +02:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[JobManager.WeatherForecast] Get() on controller JobManager.Controllers.WeatherForecastController (JobManager).
+2023-11-01 14:03:43.054 +02:00 [INF] Executing ObjectResult, writing value of type 'JobManager.WeatherForecast[]'.
+2023-11-01 14:03:43.126 +02:00 [INF] Executed action JobManager.Controllers.WeatherForecastController.Get (JobManager) in 78.4677ms
+2023-11-01 14:03:43.127 +02:00 [INF] Executed endpoint 'JobManager.Controllers.WeatherForecastController.Get (JobManager)'
+2023-11-01 14:03:43.130 +02:00 [INF] HTTP GET /WeatherForecast responded 200 in 126.0252 ms
+2023-11-01 14:03:43.135 +02:00 [INF] Request finished HTTP/1.1 GET https://localhost:44381/WeatherForecast - - - 200 - application/json;+charset=utf-8 134.8562ms
+2023-11-01 14:03:43.280 +02:00 [INF] HTTP GET /swagger/index.html responded 200 in 434.7595 ms
+2023-11-01 14:03:43.287 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44381/swagger/index.html - - - 200 - text/html;charset=utf-8 535.6544ms
+2023-11-01 14:03:43.332 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44381/_framework/aspnetcore-browser-refresh.js - -
+2023-11-01 14:03:43.347 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44381/_framework/aspnetcore-browser-refresh.js - - - 200 11990 application/javascript;+charset=utf-8 6.8747ms
+2023-11-01 14:03:43.379 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44381/_vs/browserLink - -
+2023-11-01 14:03:43.451 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44381/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 71.6388ms
+2023-11-01 14:03:43.545 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44381/swagger/v1/swagger.json - -
+2023-11-01 14:03:43.641 +02:00 [INF] Executed DbCommand (92ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (Size = 4000), @p8='?' (DbType = Int32), @p9='?' (DbType = DateTime2), @p10='?' (Size = 4000), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime2), @p13='?' (Size = 4000), @p14='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
+MERGE [WeatherForecast] USING (
+VALUES (@p0, @p1, @p2, 0),
+(@p3, @p4, @p5, 1),
+(@p6, @p7, @p8, 2),
+(@p9, @p10, @p11, 3),
+(@p12, @p13, @p14, 4)) AS i ([Date], [Summary], [TemperatureC], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Date], [Summary], [TemperatureC])
+VALUES (i.[Date], i.[Summary], i.[TemperatureC])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted0;
+
+SELECT [i].[Id] FROM @inserted0 i
+ORDER BY [i].[_Position];
+2023-11-01 14:03:43.695 +02:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 149.9530 ms
+2023-11-01 14:03:43.699 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44381/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 154.3532ms
+2023-11-01 14:03:43.783 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@p4='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [Jobs] SET [Description] = @p0, [Interval] = @p1, [LastRunTime] = @p2, [Name] = @p3
+WHERE [Id] = @p4;
+SELECT @@ROWCOUNT;
+2023-11-01 14:03:55.752 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44381/api/health - -
+2023-11-01 14:03:55.754 +02:00 [INF] Executing endpoint 'Health checks'
+2023-11-01 14:03:55.786 +02:00 [INF] Executed endpoint 'Health checks'
+2023-11-01 14:03:55.787 +02:00 [INF] HTTP GET /api/health responded 200 in 33.9063 ms
+2023-11-01 14:03:55.788 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44381/api/health - - - 200 - text/plain 35.9579ms

@@ -8,9 +8,14 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+var dbName = Environment.GetEnvironmentVariable("DB_NAME"); ;
+var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+
+var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User=sa;Password=password@12345#;";
 builder.Services.AddDbContext<JobManagerDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("JobManagerDbContext"));
+    options.UseSqlServer(connectionString);
 });
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IJobService, JobManagementService>();
@@ -25,7 +30,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddHealthChecks()
-    .AddSqlServer(builder.Configuration.GetConnectionString("JobManagerDbContext"));
+    .AddSqlServer(connectionString);
 
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)

@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>30a0929e-25de-4107-8e1a-b9858aef7401</ProjectGuid>
+    <ProjectGuid>f75f20d0-8b5b-4f86-b8e5-fd116f999fb8</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>jobmanager</DockerServiceName>

@@ -5,9 +5,13 @@ services:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
     ports: 
-      - "1433:1433" 
-  webapi:
-    image: j${DOCKER_REGISTRY-}job-manager-api
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=password@12345#
+  jobmanager:
+    container_name: job-manager-app
+    image: ${DOCKER_REGISTRY-}jobmanager
     build: 
       context: .
       dockerfile: JobManager/Dockerfile
@@ -15,3 +19,8 @@ services:
       - "8080:80"
     depends_on:
       - sql
+    environment:
+      - DB_HOST=sql
+      - DB_NAME=JobManagerDb
+      - DB_SA_PASSWORD=password@12345#
+      
